@@ -103,7 +103,7 @@ el_end(void *data, const char *element)
 	struct mydata *d = data;
 	struct db_entry *e;
 	size_t newcap;
-	const char *title;
+	const char *title, *abstract;
 	char *doc, **toks;
 	void *t;
 	int r, next;
@@ -132,6 +132,9 @@ el_end(void *data, const char *element)
 	if (!strncmp(title, "Wikipedia: ", 11))
 		title += 11;
 
+	if ((abstract = d->abstract) == NULL)
+		abstract = "";
+
 	e = &d->entries[d->len++];
 	e->name = xstrdup(d->url);
 	e->descr = xstrdup(title);
@@ -139,7 +142,7 @@ el_end(void *data, const char *element)
 	if (d->len % 1000 == 0)
 		printf("=> %zu\n", d->len);
 
-	r = asprintf(&doc, "%s %s", title, d->abstract);
+	r = asprintf(&doc, "%s %s", title, abstract);
 	if (r == -1)
 		err(1, "asprintf");
 
