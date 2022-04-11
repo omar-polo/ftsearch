@@ -1,0 +1,70 @@
+.\" Copyright (c) 2022 Omar Polo <op@openbsd.org>
+.\"
+.\" Permission to use, copy, modify, and distribute this software for any
+.\" purpose with or without fee is hereby granted, provided that the above
+.\" copyright notice and this permission notice appear in all copies.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.Dd April 11, 2022
+.Dt FTSEARCH 1
+.Os
+.Sh NAME
+.Nm ftsearch
+.Nd search strings quickly
+.Sh SYNOPSIS
+.Nm
+.Bk -words
+.Op Fl d Ar dbpath
+.Op Fl l
+.Op Fl s
+.Op Ar query
+.Ek
+.Sh DESCRIPTION
+The
+.Nm
+utility searches a database for all documents which match the given
+.Ar query .
+The database needs to be created beforehand with
+.Xr mkftsidx 1 .
+.Pp
+The arguments are as follows
+.Bl -tag -width 9m
+.It Fl d Ar dbpath
+Path to the database.
+.Pa db
+by default.
+.It Fl l
+List all known documents.
+Conflicts with
+.Fl s
+and
+.Ar query .
+.It Fl s
+Print database stats.
+Conflicts with
+.Fl l
+and
+.Ar query .
+.It Ar query
+The query to search for.
+.El
+.Sh EXAMPLES
+Search document that match
+.Dq file manager
+.Bd -literal -offset indent
+$ ftsearch 'file manager'
+.Ed
+.Sh SEE ALSO
+.Xr mkftsidx 1
+.Sh AUTHORS
+.An -nosplit
+The
+.Nm
+program was written by
+.An Omar Polo Aq Mt op@omarpolo.com .

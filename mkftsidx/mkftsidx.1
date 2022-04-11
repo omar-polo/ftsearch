@@ -1,0 +1,74 @@
+.\" Copyright (c) 2022 Omar Polo <op@openbsd.org>
+.\"
+.\" Permission to use, copy, modify, and distribute this software for any
+.\" purpose with or without fee is hereby granted, provided that the above
+.\" copyright notice and this permission notice appear in all copies.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.Dd April 11, 2022
+.Dt MKFTSIDX 1
+.Os
+.Sh NAME
+.Nm mkftsidx
+.Nd construct fts database
+.Sh SYNOPSIS
+.Nm
+.Bk -words
+.Op Fl o Ar dbpath
+.Op Fl m Ar p|w
+.Op Ar path
+.Ek
+.Sh DESCRIPTION
+.Nm
+is a program to create a fts database for
+.Xr ftsearch 1 .
+The arguments are as follows:
+.Bl -tag -width Ds
+.It Fl o Ar dbpath
+Path to the database file to create.
+.Pa db
+by default.
+.It Fl m Ar p|w
+Set the mode.
+If
+.Ar p
+.Pq the default
+then create a database with the
+.Ox
+ports tree data,
+otherwise creates a database from a Wikipedia dump.
+.It Ar path
+Path to the sources.
+When working in
+.Ar p
+mode, it's the optional path to the sqlports database.
+Otherwise, it's the mandatory path to the Wikipedia file dump.
+.El
+.Sh EXAMPLES
+To create a database with the
+.Ox
+ports tree content:
+.Bd -literal -offset indent
+$ mkftsidx
+.Ed
+.Pp
+To create a database from a Wikipedia dump to the
+.Pa db.wiki
+file:
+.Bd -literal -offset indent
+$ mkftsidx -o db.wiki -mw enwiki-latest-abstract1.xml
+.Ed
+.Sh SEE ALSO
+.Xr ftsearch 1
+.Sh AUTHORS
+.An -nosplit
+The
+.Nm
+program was written by
+.An Omar Polo Aq Mt op@omarpolo.com .
