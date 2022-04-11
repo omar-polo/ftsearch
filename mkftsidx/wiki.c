@@ -143,11 +143,11 @@ el_end(void *data, const char *element)
 	if (r == -1)
 		err(1, "asprintf");
 
-	if ((toks = tokenize(doc)) != NULL) {
-		if (!dictionary_add_words(d->dict, toks, d->len-1))
-			err(1, "dictionary_add_words");
-		freetoks(toks);
-	}
+	if ((toks = tokenize(doc)) == NULL)
+		err(1, "tokenize");
+	if (!dictionary_add_words(d->dict, toks, d->len-1))
+		err(1, "dictionary_add_words");
+	freetoks(toks);
 	free(doc);
 
 	free(d->title);

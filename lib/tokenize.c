@@ -61,6 +61,8 @@ tokenize(const char *s)
 	}
 
 	free(dup);
+	if (tok == NULL)
+		return calloc(1, sizeof(char *));
 	return tok;
 
 err:
