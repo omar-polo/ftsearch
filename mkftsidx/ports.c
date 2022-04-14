@@ -30,8 +30,8 @@
 #define SQLPORTS "/usr/local/share/sqlports"
 #endif
 
-#define QNUM "select count(*) from portsq;"
-#define QALL "select pkgstem, comment, descr_contents from portsq;"
+#define QNUM "select count(distinct pkgstem) from portsq;"
+#define QALL "select distinct pkgstem, comment, descr_contents from portsq;"
 
 static int
 countports(sqlite3 *db)
