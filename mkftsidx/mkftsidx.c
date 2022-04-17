@@ -27,6 +27,7 @@
 #include "mkftsidx.h"
 
 enum {
+	MODE_FILES,
 	MODE_SQLPORTS,
 	MODE_WIKI,
 };
@@ -47,7 +48,7 @@ xstrdup(const char *s)
 __dead void
 usage(void)
 {
-	fprintf(stderr, "usage: %s [-o dbpath] [-m p|w] [path]\n",
+	fprintf(stderr, "usage: %s [-o dbpath] [-m f|p|w] [file ...]\n",
 	    getprogname());
 	exit(1);
 }
@@ -72,6 +73,9 @@ main(int argc, char **argv)
 		switch (ch) {
 		case 'm':
 			switch (*optarg) {
+			case 'f':
+				mode = MODE_FILES;
+				break;
 			case 'p':
 				mode = MODE_SQLPORTS;
 				break;
@@ -98,7 +102,9 @@ main(int argc, char **argv)
 	if (!dictionary_init(&dict))
 		err(1, "dictionary_init");
 
-	if (mode == MODE_SQLPORTS)
+	if (mode == MODE_FILES)
+		r = idx_files(&dict, &entries, &len, argc, argv);
+	else if (mode == MODE_SQLPORTS)
 		r = idx_ports(&dict, &entries, &len, argc, argv);
 	else
 		r = idx_wiki(&dict, &entries, &len, argc, argv);

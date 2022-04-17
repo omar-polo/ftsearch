@@ -21,8 +21,8 @@
 .Nm
 .Bk -words
 .Op Fl o Ar dbpath
-.Op Fl m Ar p|w
-.Op Ar path
+.Op Fl m Ar f|p|w
+.Op Ar
 .Ek
 .Sh DESCRIPTION
 .Nm
@@ -34,7 +34,7 @@ The arguments are as follows:
 Path to the database file to create.
 .Pa db
 by default.
-.It Fl m Ar p|w
+.It Fl m Ar f|p|w
 Set the mode.
 If
 .Ar p
@@ -42,9 +42,16 @@ If
 then create a database with the
 .Ox
 ports tree data,
+If
+.Ar f
+index plain-text files;
 otherwise creates a database from a Wikipedia dump.
-.It Ar path
+.It Ar
 Path to the sources.
+When workin in
+.Ar f
+mode, it's the list of files to index
+.Pq if empty reads from stdin one path per line .
 When working in
 .Ar p
 mode, it's the optional path to the sqlports database.

@@ -1,7 +1,7 @@
 .PATH:${.CURDIR}/../lib
 
 PROG =	mkftsidx
-SRCS =	mkftsidx.c ports.c wiki.c db.c dictionary.c tokenize.c
+SRCS =	mkftsidx.c files.c ports.c wiki.c db.c dictionary.c tokenize.c
 
 WARNINGS = yes
 

@@ -18,6 +18,10 @@
 __dead void	 usage(void);
 char		*xstrdup(const char *);
 
+/* files.c */
+int idx_files(struct dictionary *, struct db_entry **, size_t *,
+    int, char **);
+
 /* ports.c */
 int idx_ports(struct dictionary *, struct db_entry **, size_t *,
     int, char **);
