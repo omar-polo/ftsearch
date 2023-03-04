@@ -37,7 +37,7 @@ tokenize(const char *s)
 	d = dup;
 
 	for (t = d; *t; ++t)
-		*t = tolower(*t);
+		*t = tolower((unsigned char)*t);
 
 	while ((t = strsep(&d, WDELIMS)) != NULL) {
 		if (*t == '\0')
